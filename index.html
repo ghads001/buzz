@@ -1,0 +1,464 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The BUZZ - Elevating Your Financial Journey</title>
+<style>
+    :root {
+        --primary-blue: #0a2472;
+        --secondary-blue: #1e96fc;
+        --light-blue: #e6f3ff;
+        --white: #ffffff;
+        --gray: #333333;
+    }
+    body, html {
+        margin: 0;
+        padding: 0;
+        font-family: 'Montserrat', sans-serif;
+        background-color: var(--light-blue);
+        color: var(--gray);
+    }
+    .container {
+        display: flex;
+        min-height: 100vh;
+    }
+    .sidebar {
+        width: 350px;
+        background-color: var(--primary-blue);
+        padding: 2rem 1rem;
+        position: fixed;
+        height: 100vh;
+        overflow-y: auto;
+    }
+    .main-content {
+        flex-grow: 1;
+        margin-left: 390px;
+        padding: 2rem;
+    }
+    header {
+        background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+        padding: 2rem;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+        text-align: center;
+        border-radius: 0 0 20px 20px;
+    }
+    .logo {
+        max-width: 250px;
+        display: block;
+        margin: 0 auto 1rem;
+    }
+    .quote {
+        font-style: italic;
+        color: var(--white);
+        font-size: 0.8rem;
+        margin-top: 0.5rem;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    nav {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+    nav a {
+        color: var(--white);
+        text-decoration: none;
+        margin: 0 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+    }
+    nav a:hover {
+        background-color: rgba(255,255,255,0.2);
+        transform: translateY(-2px);
+    }
+    .program-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+    .program-box {
+        background-color: var(--white);
+        border-radius: 15px;
+        padding: 1.5rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    .program-box::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, transparent, rgba(30, 150, 252, 0.1), transparent);
+        transform: rotate(45deg);
+        transition: all 0.5s ease;
+    }
+    .program-box:hover::before {
+        top: -100%;
+        left: -100%;
+    }
+    .program-box:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+    .instant-reward {
+        border: 2px solid var(--secondary-blue);
+    }
+    .instant-reward::after {
+        content: 'Instant Rewards';
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: var(--secondary-blue);
+        color: var(--white);
+        padding: 0.25rem 0.5rem;
+        border-radius: 10px;
+        font-size: 0.7rem;
+    }
+    .daily-feature {
+        background-color: var(--white);
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-top: 2rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+    .daily-feature:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+    .signup-form {
+        background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+        border-radius: 15px;
+        padding: 2rem;
+        margin-top: 2rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        color: var(--white);
+    }
+    .signup-form input[type="email"] {
+        width: calc(100% - 2rem);
+        padding: 0.75rem 1rem;
+        margin-bottom: 1rem;
+        border: none;
+        border-radius: 25px;
+        font-size: 1rem;
+    }
+    .signup-form button {
+        background-color: var(--white);
+        color: var(--primary-blue);
+        border: none;
+        padding: 0.75rem 2rem;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+    .signup-form button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    .disclaimer {
+        font-size: 0.7rem;
+        margin-top: 2rem;
+        text-align: center;
+        color: var(--gray);
+        padding: 1rem;
+        background-color: rgba(255,255,255,0.7);
+        border-radius: 10px;
+    }
+    footer {
+        background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+        color: var(--white);
+        text-align: center;
+        padding: 1.5rem;
+        margin-top: 2rem;
+        border-radius: 20px 20px 0 0;
+    }
+    .suggestion-form {
+        margin-top: 2rem;
+        background-color: rgba(255, 255, 255, 0.75);
+        padding: 1.5rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .suggestion-form h3 {
+        color: var(--primary-blue);
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+    .form-group {
+        margin-bottom: 1rem;
+    }
+    .suggestion-form label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--gray);
+        font-weight: 500;
+    }
+    .suggestion-form input,
+    .suggestion-form textarea {
+        display: block;
+        margin: 0 auto;
+        width: calc(100% - 2rem);
+        max-width: 300px;
+        padding: 0.75rem;
+        border: 1px solid var(--secondary-blue);
+        border-radius: 8px;
+        font-size: 0.9rem;
+        transition: border-color 0.3s ease;
+    }
+    .suggestion-form input:focus,
+    .suggestion-form textarea:focus {
+        outline: none;
+        border-color: var(--primary-blue);
+    }
+    .suggestion-form textarea {
+        height: 100px;
+        resize: vertical;
+    }
+    .suggestion-form button {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: var(--secondary-blue);
+        color: var(--white);
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+    .suggestion-form button:hover {
+        background-color: var(--primary-blue);
+        transform: translateY(-2px);
+    }
+    .cookie-popup {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        background-color: var(--white);
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        display: none;
+        z-index: 1000;
+    }
+    .cookie-popup p {
+        margin-bottom: 1rem;
+    }
+    .cookie-popup button {
+        background-color: var(--secondary-blue);
+        color: var(--white);
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .cookie-popup button:hover {
+        background-color: var(--primary-blue);
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <form class="suggestion-form">
+                <h3>Suggest an Affiliate Program</h3>
+                <div class="form-group">
+                    <label for="program_name">Name of Program:</label>
+                    <input type="text" id="program_name" name="program_name" maxlength="20">
+                </div>
+                <div class="form-group">
+                    <label for="affiliate_link">Affiliate Link:</label>
+                    <input type="url" id="affiliate_link" name="affiliate_link" maxlength="20">
+                </div>
+                <div class="form-group">
+                    <label for="referral_id">Referral ID:</label>
+                    <input type="text" id="referral_id" name="referral_id" maxlength="20">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" maxlength="20">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description of Program:</label>
+                    <textarea id="description" name="description" maxlength="100" rows="3"></textarea>
+                </div>
+                <button type="submit">Submit Suggestion</button>
+            </form>
+        </aside>
+        <main class="main-content">
+            <header>
+                <img src="/a/05d99c11-bfd2-4203-b01d-da0c5974a993" alt="The BUZZ logo" class="logo">
+                <p class="quote">"While money can't buy happiness, it certainly lets you choose your own form of misery." - Groucho Marx</p>
+                <nav>
+                    <a href="index.html" target="_blank">Home</a>
+                    <a href="contact.html" target="_blank">Contact Us</a>
+                </nav>
+            </header>
+            
+            <section class="trending-programs">
+                <h2>Trending Programs</h2>
+                <div class="program-grid">
+                    <div class="program-box instant-reward">
+                        <h3>Banking & Investing</h3>
+                        <p>Unlock premium financial opportunities with instant rewards!</p>
+                        <a href="https://www.thebuzz.com/banking-investing" target="_blank">Explore Now</a>
+                    </div>
+                    <div class="program-box">
+                        <h3>Crypto Trading & Staking</h3>
+                        <p>Navigate the crypto world and earn passive income effortlessly.</p>
+                        <a href="https://www.thebuzz.com/crypto-trading-staking" target="_blank">Start Trading</a>
+                    </div>
+                    <div class="program-box">
+                        <h3>Social Sites</h3>
+                        <p>Connect, engage, and monetize your social presence.</p>
+                        <a href="https://www.thebuzz.com/social-sites" target="_blank">Get Social</a>
+                    </div>
+                    <div class="program-box instant-reward">
+                        <h3>Surveys & Tasks</h3>
+                        <p>Turn your opinions and skills into instant cash rewards.</p>
+                        <a href="https://www.thebuzz.com/surveys-tasks" target="_blank">Earn Now</a>
+                    </div>
+                    <div class="program-box">
+                        <h3>Social Casinos & Sports Betting</h3>
+                        <p>Experience thrilling games and sports action with potential rewards.</p>
+                        <a href="https://www.thebuzz.com/social-casinos-betting" target="_blank">Play Responsibly</a>
+                    </div>
+                    <div class="program-box">
+                        <h3>AI Programs</h3>
+                        <p>Harness the power of AI to revolutionize your business growth.</p>
+                        <a href="https://www.thebuzz.com/ai-programs" target="_blank">Innovate with AI</a>
+                    </div>
+                    <div class="program-box">
+                        <h3>Graphic & Website Tools</h3>
+                        <p>Design like a pro with our curated selection of creative tools.</p>
+                        <a href="https://www.thebuzz.com/graphic-website-tools" target="_blank">Unleash Creativity</a>
+                    </div>
+                    <div class="program-box instant-reward">
+                        <h3>Business on a Budget</h3>
+                        <p>Launch your dream venture without breaking the bank. Smart tips inside!</p>
+                        <a href="https://www.thebuzz.com/business-on-budget" target="_blank">Start Smart</a>
+                    </div>
+                    <div class="program-box">
+                        <h3>Business Tools & Services</h3>
+                        <p>Elevate your operations with our premium business solutions.</p>
+                        <a href="https://www.thebuzz.com/business-tools-services" target="_blank">Optimize Now</a>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="daily-feature">
+                <h3>Recipe of the Day</h3>
+                <p>Today's Culinary Delight: Blueberry Lemon Cheesecake Bars</p>
+                <a href="https://www.thebuzz.com/recipe-of-the-day" target="_blank">View Recipe</a>
+            </section>
+            
+            <section class="daily-feature">
+                <h3>Free Item of the Day</h3>
+                <p>Today's Special Offer: "Master Social Media Marketing in 7 Days" Video Course</p>
+                <a href="https://www.thebuzz.com/free-item" target="_blank">Claim Your Free Course</a>
+            </section>
+            
+            <section class="signup-form">
+                <h3>Elevate Your Success!</h3>
+                <p>Sign up now for exclusive updates and expert tips on creating your own thriving online presence!</p>
+                <form action="https://www.thebuzz.com/signup" method="post">
+                    <input type="email" name="email" placeholder="Enter your email" required>
+                    <button type="submit">Join The BUZZ Community</button>
+                </form>
+            </section>
+            
+            <p class="disclaimer">
+                The creator of this site is not responsible for expired or changed programs. Please do your due diligence and understand the program's instructions when choosing the program best for you. Be vigilant about potential scams and always verify the legitimacy of offers before participating.
+            </p>
+        </main>
+    </div>
+    <footer>
+        <p>&copy; 2024 The BUZZ. All rights reserved. Empowering your financial journey.</p>
+    </footer>
+    <div id="cookie-popup" class="cookie-popup">
+        <p>This website uses cookies to enhance your browsing experience. By continuing to use this site, you agree to our use of cookies.</p>
+        <button id="accept-cookies">Accept</button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                const programBoxes = document.querySelectorAll('.program-box');
+                if (programBoxes) {
+                    programBoxes.forEach(box => {
+                        if (box) {
+                            box.addEventListener('mouseenter', () => {
+                                box.style.backgroundColor = '#f0f9ff';
+                            });
+                            box.addEventListener('mouseleave', () => {
+                                box.style.backgroundColor = '#ffffff';
+                            });
+                        }
+                    });
+                }
+
+                const anchors = document.querySelectorAll('a[href^="#"]');
+                if (anchors) {
+                    anchors.forEach(anchor => {
+                        if (anchor) {
+                            anchor.addEventListener('click', function (e) {
+                                e.preventDefault();
+                                const targetEl = document.querySelector(this.getAttribute('href'));
+                                if (targetEl) {
+                                    targetEl.scrollIntoView({
+                                        behavior: 'smooth'
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+
+                const sidebarButtons = document.querySelectorAll('.sidebar-button');
+                if (sidebarButtons) {
+                    sidebarButtons.forEach(button => {
+                        if (button) {
+                            button.addEventListener('mouseenter', () => {
+                                button.style.transform = 'translateY(-3px) scale(1.05)';
+                            });
+                            button.addEventListener('mouseleave', () => {
+                                button.style.transform = 'translateY(0) scale(1)';
+                            });
+                        }
+                    });
+                }
+
+                showCookiePopup();
+            } catch (error) {
+                console.error('An error occurred:', error);
+            }
+        });
+
+        function showCookiePopup() {
+            try {
+                const popup = document.getElementById('cookie-popup');
+                const acceptButton = document.getElementById('accept-cookies');
+
+                if (popup && acceptButton) {
+                    if (!localStorage.getItem('cookiesAccepted')) {
+                        popup.style.display = 'block';
+                    }
+
+                    acceptButton.addEventListener('click', () => {
+                        localStorage.setItem('cookiesAccepted', 'true');
+                        popup.style.display = 'none';
+                    });
+                }
+            } catch (error) {
+                console.error('Error in showCookiePopup:', error);
+            }
+        }
+    </script>
+</body></html>
